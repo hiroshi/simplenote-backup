@@ -32,26 +32,26 @@ Sorry, if your desktop OS is not an OS X.
 Sorry, if you are not familiar with command line.
 I hope you figure out how to deal with it.
 
-1. Create a working directory
+### 1. Create a working directory
 
 If you don't have no idea where to place the directory, home directory is an option.
 
     mkdir ~/SimplenoteBackup
     cd ~/SimplenoteBackup
 
-2. Get what needed
+### 2. Get what needed
 
     git clone https://github.com/Simperium/simperium-python.git
     git clone https://github.com/hiroshi/simplenote-backup.git
 
-3. Get your token
+### 3. Get your token
 
   1. Open https://app.simplenote.com and login.
   2. Open the inspector in your browser (A shortcut may be Command + Alt + i).
   3. Type `simperium_opts.token` in the console of the inspector.
   4. You will see a token, like "a543b9622f7bf1a340a8a6682d09ad17".
 
-4. Run the script
+### 4. Run the script
 
     cd ~/SimplenoteBackup/simplenote-backup
     make TOKEN=YOUR_TOKEN_HERE
@@ -67,18 +67,13 @@ If you'd like to choose another destination directory, add BACKUP_DIR option.
     make TOKEN=YOUR_TOKEN_HERE BACKUP_DIR=~/my-simplenote-backup
 
 
-5. Add cron task if you wish
+### 5. Add cron task if you wish
 
     crontab -e
 
 If you wish to execute a backup job once an hour, add following line:
 
     0 * * * * cd $HOME/SimplenoteBackup/simplenote-backup && make TOKEN=YOU_TOKEN_HERE > cron.log 2>&1
-
-
-
-
-
 
 
 ## TODO
