@@ -21,5 +21,6 @@ for note in notes['index']:
         f.write(note['d']['content'].encode('utf8'))
         f.write("\n")
         f.write("Tags: %s\n" % ", ".join(note['d']['tags']).encode('utf8'))
+    os.utime(path,(note['d']['modificationDate'],note['d']['modificationDate']))
 
 print "Done: %d files." % len(notes['index'])
