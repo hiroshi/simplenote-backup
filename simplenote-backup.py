@@ -15,10 +15,11 @@ notes = api.note.index(data=True)
 for note in notes['index']:
     path = os.path.join(backup_dir, note['id'] + '.txt')
     #print path
-    f = open(path, "w")
-    # print json.dumps(note, indent=2)
-    f.write("id: %s\n" % note['id'])
-    f.write("tags: %s\n" % ", ".join(note['d']['tags']).encode('utf8'))
-    f.write("\n")
-    f.write(note['d']['content'].encode('utf8'))
+    with open(path, "w") as f:
+        # print json.dumps(note, indent=2)
+        #f.write("id: %s\n" % note['id'])
+        f.write(note['d']['content'].encode('utf8'))
+        f.write("\n")
+        f.write("Tags: %s\n" % ", ".join(note['d']['tags']).encode('utf8'))
+
 print "Done: %d files." % len(notes['index'])
