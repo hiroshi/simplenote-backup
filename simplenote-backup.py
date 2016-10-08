@@ -13,7 +13,20 @@ api = SimperiumApi(appname, token)
 #print token
 notes = api.note.index(data=True)
 for note in notes['index']:
-    path = os.path.join(backup_dir, note['id'] + '.txt')
+    #if the note has a single tag, put it into a subdirectory named as the tag
+    if len(note['d']['tags'])==1:
+        tag = note['d']['tags'][0]
+    else:
+        tag = ''
+    dir_path = os.path.join(backup_dir, tag)
+    try:
+        os.makedirs(dir_path)
+    except OSError as e:
+        if e.errno == 17:
+            # the subdir already exists
+            pass
+
+    path = os.path.join(dir_path, note['id'] + '.txt')
     #print path
     with open(path, "w") as f:
         # print json.dumps(note, indent=2)
