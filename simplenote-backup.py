@@ -13,12 +13,17 @@ api = SimperiumApi(appname, token)
 #print token
 notes = api.note.index(data=True)
 for note in notes['index']:
+trashed = 0
+    dir_path = backup_dir
+    #if the note was trashed, put it into a 'TRASH' subdirectory
+    if note['d']['deleted']== True:
+        dir_path = os.path.join(dir_path, 'TRASH')
+        trashed = trashed + 1
+
     #if the note has a single tag, put it into a subdirectory named as the tag
     if len(note['d']['tags'])==1:
-        tag = note['d']['tags'][0]
-    else:
-        tag = ''
-    dir_path = os.path.join(backup_dir, tag)
+        dir_path = os.path.join(dir_path, note['d']['tags'][0])
+
     try:
         os.makedirs(dir_path)
     except OSError as e:
@@ -34,6 +39,9 @@ for note in notes['index']:
         f.write(note['d']['content'].encode('utf8'))
         f.write("\n")
         f.write("Tags: %s\n" % ", ".join(note['d']['tags']).encode('utf8'))
+        # record pinned notes and whatever else
+        if len(note['d']['systemTags'])>0:
+            f.write("System tags: %s\n" % ", ".join(note['d']['systemTags']).encode('utf8'))
     os.utime(path,(note['d']['modificationDate'],note['d']['modificationDate']))
 
-print "Done: %d files." % len(notes['index'])
+print "Done: %d files (%d in TRASH)." % (len(index), trashed)
