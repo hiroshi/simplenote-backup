@@ -11,9 +11,17 @@ if not os.path.exists(backup_dir):
 
 api = SimperiumApi(appname, token)
 #print token
-notes = api.note.index(data=True)
-for note in notes['index']:
+
+dump = api.note.index(data=True)
+index = dump['index']
+# the dump might be paged; go through all the pages
+while 'mark' in dump:
+    dump = api.note.index(data=True, mark=dump['mark'])
+    json.dump(dump,open("dump", "a"))
+    index = index + dump['index']
+
 trashed = 0
+for note in index:
     dir_path = backup_dir
     #if the note was trashed, put it into a 'TRASH' subdirectory
     if note['d']['deleted']== True:
