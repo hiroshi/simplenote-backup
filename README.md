@@ -4,14 +4,17 @@ simplenote-backup
 - It backups your notes as separated files named with note-id (like 68b329da9893e34099c7d8ad5cb9c940.txt)
 - Backup files contains tags.
 - It stores files in `~/Dropbox/SimplenoteBackups` by default.
+  - If a note has a single tag, create it into a directory named as the tag. When you import notes into the Notes.app, you can keep the structures.
+
 
 ## Sample of the content of a backup file of a note.
 
-    id: 68b329da9893e34099c7d8ad5cb9c940
+    Content of the note.
+    After the content and a blank line tags are followed.
+    ....
+    
     tags: foo, bar
 
-    Content of the note start here after the blank line after headers like email.
-    ....
 
 ## Why
 
@@ -55,11 +58,11 @@ If you don't have no idea where to place the directory, home directory is an opt
 
     cd ~/SimplenoteBackup/simplenote-backup
     make TOKEN=YOUR_TOKEN_HERE
-    
+
 If succeed you will see like this:
 
     Starting backup your simplenote to: /Users/hiroshi/Dropbox/SimplenoteBackups
-    Done: 100 files.
+    Done: 3156 files (1605 in TRASH).
 
 
 If you'd like to choose another destination directory, add BACKUP_DIR option.
