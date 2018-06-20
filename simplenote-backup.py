@@ -1,9 +1,10 @@
-import os, sys, json
+import os, sys, json, datetime
 from simperium.core import Api as SimperiumApi
 
 appname = 'chalk-bump-f49' # Simplenote
 token = os.environ['TOKEN']
-backup_dir = sys.argv[1] if len(sys.argv) > 1 else (os.path.join(os.environ['HOME'], "Dropbox/SimplenoteBackups"))
+today = datetime.date.today()
+backup_dir = sys.argv[1] if len(sys.argv) > 1 else (os.path.join(os.environ['HOME'], "Dropbox/config/Backup/SimplenoteBackups", str(today)))
 print "Starting backup your simplenote to: %s" % backup_dir
 if not os.path.exists(backup_dir):
     print "Creating directory: %s" % backup_dir
