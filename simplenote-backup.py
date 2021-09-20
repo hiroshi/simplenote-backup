@@ -17,7 +17,6 @@ index = dump['index']
 # the dump might be paged; go through all the pages
 while 'mark' in dump:
     dump = api.note.index(data=True, mark=dump['mark'])
-    json.dump(dump,open("dump", "a"))
     index = index + dump['index']
 
 trashed = 0
