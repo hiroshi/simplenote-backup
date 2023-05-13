@@ -77,6 +77,16 @@ If you wish to execute a backup job once an hour, add the following line to your
 
     0 * * * * cd $HOME/SimplenoteBackup/simplenote-backup && make TOKEN=YOU_TOKEN_HERE > cron.log 2>&1
 
+## Build and run without Python using Docker
+
+    # Build a local Docker image straight from sources on Github.
+    docker build --pull -t simplenote-backup github.com/hiroshi/simplenote-backup
+    
+    # Create host's backup dir. Otherwise, Docker will create it, but with wrong ownership (root:root).
+    mkdir -vp /path/to/backups/
+    
+    # Launch a one-off container which will dump files in your specified path, mounted at container's /data/ directory.
+    docker run --rm -it --user $(id -u):$(id -g) -e BACKUP_DIR=/data/ -e TOKEN=your_token -v /path/to/backups/:/data/ simplenote-backup
 
 ## TODO
 - Provide an archive file packed with simperium sdk.
