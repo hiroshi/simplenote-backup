@@ -49,14 +49,14 @@ If you don't have any idea where to place the directory, your home directory is 
 ### 3. Get your token
 
   1. Open https://app.simplenote.com and log in.
-  2. Open the inspector in your browser (A shortcut may be Command + Alt + j).
-  3. Type `simperium_opts.token` in the console of the inspector, and press enter.
-  4. You will see your token; it looks like "a543b9622f7bf1a340a8a6682d09ad17".
+  2. Open the inspector in your browser (A shortcut may be Command + Alt + i).
+  3. Move to Application tab, disclose Storage/Cookie, select `https://app.simplenote.com` then double click the value of `token` to copy.
+  4. You may get your token; it looks like "a543b9622f7bf1a340a8a6682d09ad17".
 
 ### 4. Run my script
 
     cd ~/SimplenoteBackup/simplenote-backup
-    make TOKEN=YOUR_TOKEN_HERE
+    make TOKEN=<YOUR_TOKEN_HERE>
 
 If it succeeds you will see something like this:
 
